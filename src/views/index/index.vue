@@ -32,10 +32,21 @@
                         <div>Week</div>
                         <div>Month</div>
                     </div>
-                    <div flex justify-between mb-18px>
-                        <div>123</div>
-                        <div>123</div>
-                        <div>123</div>
+                    <div flex justify-between items-center mb-18px>
+                        <i
+                            class="iconfont icon-xiangzuo1 changePageButton flex-center"
+                        ></i>
+                        <div>
+                            {{
+                                MONTH_TYPE_LIST.find(
+                                    (item) => item.index === month
+                                )?.value || ''
+                            }}
+                            {{ year }}
+                        </div>
+                        <i
+                            class="iconfont icon-xiangyou1 changePageButton flex-center"
+                        ></i>
                     </div>
                     <!-- 顶部日期 -->
                     <div class="flex text-#9CB2CD mb-20px">
@@ -65,11 +76,14 @@
 <script setup lang="ts">
 import { getTime } from '@/service/getTime'
 import { computed, reactive, ref } from 'vue'
-import { DAY_TYPE_LIST } from '@/utils/constant'
+import { DAY_TYPE_LIST, MONTH_TYPE_LIST } from '@/utils/constant'
 
 // 获取当前的月份和年份
 const date = new Date()
 const { year, month } = getTime(date)
+const realMonth = computed(() => {
+    return month + 1
+})
 
 // 获取上个月最后一天的时间戳
 const currentLastDayRaw: any = new Date(year, month, 0)
@@ -140,5 +154,17 @@ const getNextCurrentMonth = () => {
     padding: 30px 15px;
     height: 100%;
     box-shadow: inset -1px 0px 0px 0px #d7e3f1;
+}
+.changePageButton {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    border-radius: 6px;
+    color: #9cb2cd;
+    border: 0.77px solid #dee2ec;
+    background: #fff;
+}
+.notCurrentMonth {
+    color: #d8e3f1;
 }
 </style>

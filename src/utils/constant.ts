@@ -17,5 +17,30 @@ export const DAY_TYPE_LIST = [
     { index: DAY_TYPE.SUNDAY, value: 'Sun' },
 ]
 export const enum MONTH_TYPE {
-    
+    January,
+    February,
+    March,
+    April,
+    May,
+    June,
+    July,
+    August,
+    September,
+    October,
+    November,
+    December,
 }
+export const MONTH_TYPE_LIST = [
+    { index: MONTH_TYPE.January, value: 'Jan' },
+    { index: MONTH_TYPE.February, value: 'Feb' },
+    { index: MONTH_TYPE.March, value: 'Mar' },
+    { index: MONTH_TYPE.April, value: 'Ari' },
+    { index: MONTH_TYPE.May, value: 'May' },
+    { index: MONTH_TYPE.June, value: 'Jun' },
+    { index: MONTH_TYPE.July, value: 'Jul' },
+    { index: MONTH_TYPE.August, value: 'Aut' },
+    { index: MONTH_TYPE.September, value: 'Sep' },
+    { index: MONTH_TYPE.October, value: 'Oct' },
+    { index: MONTH_TYPE.November, value: 'Nov' },
+    { index: MONTH_TYPE.December, value: 'Dec' },
+]
