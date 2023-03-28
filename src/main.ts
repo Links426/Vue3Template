@@ -3,7 +3,7 @@ import { createPinia } from 'pinia'
 import 'uno.css'
 import '@/assets/css/reset.css'
 
-import router from '@/router/router'
+import router from '@/router'
 import 'normalize.css'
 import App from './App.vue'
 
