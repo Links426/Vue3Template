@@ -60,7 +60,6 @@ caption {
     font-size: 100%;
     vertical-align: baseline;
     background: transparent;
-    color: #273142;
     font-size: 14px;
 }
 /** 重置文本格式元素 **/
@@ -80,11 +79,6 @@ sup {
    /* 重置，减少对行高的影响 */
    sub {
     vertical-align: text-bottom;
-}
-​
-   /** 重置表单元素 **/
-   legend {
-    color: #000;
 }
 ​
    /* for ie6 */

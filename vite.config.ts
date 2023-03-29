@@ -1,5 +1,8 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import Components from 'unplugin-vue-components/vite'
+import { ArcoResolver } from 'unplugin-vue-components/resolvers'
+import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 import { presetUno, presetAttributify } from 'unocss'
 import path from 'path'
@@ -16,6 +19,27 @@ export default defineConfig({
                 ['flex-center', 'flex items-center justify-center'],
                 ['rounded', 'rounded-50%'],
             ],
+        }),
+        Components({
+            resolvers: [
+                ArcoResolver({
+                    sideEffect: true,
+                }),
+            ],
+        }),
+        AutoImport({
+            resolvers: [ArcoResolver()],
+            include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
+
+            // global imports to register
+            imports: [
+                // 插件预设支持导入的api
+                'vue',
+                'vue-router',
+                'pinia',
+                // 自定义导入的api
+            ],
+            dts: './auto-imports.d.ts',
         }),
     ],
     resolve: {
