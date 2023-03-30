@@ -1,8 +1,22 @@
 <template>
     <a-layout style="height: 100vh">
-        <a-layout-header h-60px flex items-center px-24px class="header-shadow"
-            >Mechanical Pro</a-layout-header
-        >
+        <a-layout-header
+            h-60px
+            min-w-988px
+            flex
+            items-center
+            px-24px
+            justify-between
+            class="header-shadow"
+            ><div flex-center>
+                <img src="@/assets/img/answer.png" w-20px h-28px mr-12px />
+                <span>Mechanical Pro</span>
+            </div>
+            <div>
+                <a-button @click="changeColor">换色黑</a-button>
+                <a-button @click="changeColor1">换色亮</a-button>
+            </div>
+        </a-layout-header>
         <a-layout>
             <a-layout-sider
                 breakpoint="lg"
@@ -13,8 +27,10 @@
             >
                 <div />
                 <a-menu
-                    :defaultOpenKeys="['0']"
-                    :defaultSelectedKeys="['0_0']"
+                    :defaultOpenKeys="router.currentRoute.value.meta.openKeys"
+                    :defaultSelectedKeys="
+                        router.currentRoute.value.meta.selectKeys
+                    "
                     @menu-item-click="To"
                 >
                     <a-sub-menu key="0">
@@ -36,15 +52,21 @@
                     </a-sub-menu>
                 </a-menu>
             </a-layout-sider>
-            <a-layout-content class="p-20px content-bg">
-                <a-breadcrumb :routes="routesList">
+            <a-layout-content class="min-w-1200px w-full p-20px content-bg">
+                <a-breadcrumb :routes="routesList" mb-16px>
                     <template #item-render="{ route, paths }">
-                        <span @click="toBrumbPage(paths)">{{
+                        <a-link @click="toBrumbPage(paths)">{{
                             route.meta.label
-                        }}</span>
+                        }}</a-link>
                     </template>
                 </a-breadcrumb>
-                <router-view></router-view>
+                <router-view v-slot="{ Component }">
+                    <transition name="fade" mode="out-in">
+                        <keep-alive>
+                            <component :is="Component" />
+                        </keep-alive>
+                    </transition>
+                </router-view>
             </a-layout-content>
         </a-layout>
     </a-layout>
@@ -55,7 +77,7 @@ const router = useRouter()
 const collapsed = ref(false)
 
 const routesList: any = ref([])
-const onCollapse = (val: boolean, type: string) => {
+const onCollapse = (val: boolean) => {
     collapsed.value = val
 }
 
@@ -74,13 +96,15 @@ const To = (key: string) => {
 const useKeys = ['path', 'meta']
 onBeforeRouteUpdate((to: any) => {
     const newArr: any = []
-    to.matched.forEach((item) => {
-        const list = Object.entries(item).filter(([key]) =>
-            useKeys.includes(key)
-        )
-        const newItem = Object.fromEntries(list)
-        newArr.push(newItem)
-    })
+    to.matched.forEach(
+        (item: { [s: string]: unknown } | ArrayLike<unknown>) => {
+            const list = Object.entries(item).filter(([key]) =>
+                useKeys.includes(key)
+            )
+            const newItem = Object.fromEntries(list)
+            newArr.push(newItem)
+        }
+    )
     routesList.value = newArr
 })
 
@@ -99,15 +123,32 @@ onMounted(() => {
     })
     routesList.value = newArr
 })
+
+const changeColor = () => {
+    document.body.setAttribute('arco-theme', 'dark')
+}
+const changeColor1 = () => {
+    document.body.setAttribute('arco-theme', 'light')
+}
 </script>
 
 <style scoped>
 .header-shadow {
-    z-index: 10;
-    box-shadow: 0px 4px 10px 0px rgba(78, 89, 105, 0.06),
-        0px 1px 0px 0px #e5e6eb;
+    z-index: 15;
+    background-color: var(--color-bg-2);
+    color: var(--color-neutral-10);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .content-bg {
     background-color: var(--color-neutral-1);
+}
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
 }
 </style>
