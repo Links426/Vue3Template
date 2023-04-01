@@ -2,7 +2,6 @@
     <a-layout style="height: 100vh">
         <a-layout-header
             h-60px
-            min-w-988px
             flex
             items-center
             px-24px
@@ -52,7 +51,7 @@
                     </a-sub-menu>
                 </a-menu>
             </a-layout-sider>
-            <a-layout-content class="min-w-1200px w-full p-20px content-bg">
+            <a-layout-content class="w-full p-20px content-bg">
                 <a-breadcrumb :routes="routesList" mb-16px>
                     <template #item-render="{ route, paths }">
                         <a-link @click="toBrumbPage(paths)">{{
@@ -144,7 +143,7 @@ const changeColor1 = () => {
 }
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.5s ease;
+    transition: opacity 0.3s ease;
 }
 
 .fade-enter-from,
