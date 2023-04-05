@@ -12,7 +12,7 @@ export interface Result<T = any> {
 }
 
 const service: AxiosInstance = axios.create({
-    baseURL: 'http://172.22.56.12:9632/serve',
+    baseURL: 'xxx',
     timeout: 10000,
 })
 
