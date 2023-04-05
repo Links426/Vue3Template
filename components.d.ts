@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     ABreadcrumb: typeof import('@arco-design/web-vue')['Breadcrumb']
     ABreadcrumbItem: typeof import('@arco-design/web-vue')['BreadcrumbItem']
     AButton: typeof import('@arco-design/web-vue')['Button']
+    ACard: typeof import('@arco-design/web-vue')['Card']
     ADivider: typeof import('@arco-design/web-vue')['Divider']
     AEcharts: typeof import('./src/components/EChartsComponents/a-echarts.vue')['default']
     ALayout: typeof import('@arco-design/web-vue')['Layout']

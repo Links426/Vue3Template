@@ -1,21 +1,20 @@
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import '@arco-design/web-vue/dist/arco.css'
+import { setupStore } from '@/stores/store'
 import ArcoVue from '@arco-design/web-vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
-import 'uno.css'
-import '@/assets/css/reset.css'
-
 import router from '@/router'
-import 'normalize.css'
 import App from './App.vue'
 
-// 引入iconfont
+import 'uno.css'
+import '@arco-design/web-vue/dist/arco.css'
+import '@/assets/css/reset.css'
+import 'normalize.css'
 import '@/assets/font/iconfont.css'
 
-createApp(App)
-    .use(createPinia())
-    .use(router)
-    .use(ArcoVue)
-    .use(ArcoVueIcon)
-    .mount('#app')
+const app = createApp(App)
+
+app.use(router)
+app.use(ArcoVue)
+app.use(ArcoVueIcon)
+setupStore(app)
+app.mount('#app')
